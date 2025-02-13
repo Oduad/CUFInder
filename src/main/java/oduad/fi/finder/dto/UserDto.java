@@ -1,9 +1,14 @@
 package oduad.fi.finder.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class User {
+@Data
+@NoArgsConstructor
+public class UserDto {
     //This is for
 
     private Long id;
@@ -15,7 +20,7 @@ public class User {
     private String school;
     private Integer height;
     private String interestedIn;
-    //Se refiere a parte de su biografía
+    //It's about the student's biography
     private String bio;
     private String profilePictureUrl;
     private LocalDate birthDate;

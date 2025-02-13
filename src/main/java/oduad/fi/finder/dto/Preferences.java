@@ -5,7 +5,7 @@ public class Preferences {
 
     private Long id;
 
-    private User user;
+    private UserDto user;
 
     private int minAge;
 
