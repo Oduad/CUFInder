@@ -5,6 +5,8 @@ import oduad.fi.finder.repository.UserRepository;
 import oduad.fi.finder.service.UserService;
 import oduad.fi.finder.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
@@ -13,24 +15,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/fisfinder")
 public class UserControllerImp implements UserController{
 
-    @Autowired
-    UserServiceImp userService;
-    @Autowired
-    UserRepository repository;
+    //@Autowired
+    private final UserServiceImp userService;
+    //@Autowired
+    private final UserRepository repository;
 
+    public UserControllerImp(UserServiceImp userService, UserRepository repository){
+        this.userService = userService;
+        this.repository = repository;
+    }
 
     @Override
     @PostMapping("/user")
-    public void createUser(@RequestBody User user) {
-        userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
     @Override
     @PutMapping("/user/{id}")
-    public void updateUser(@PathVariable Long id,
-                           @RequestBody User updateUser) {
-        updateUser.setId(id);
-        repository.save(updateUser);
+    public ResponseEntity<User> updateUser(@PathVariable Long id,
+                           @RequestBody User updatedUser) {
+        updatedUser.setId(id);
+        repository.save(updatedUser);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return null;
     }
 
     @Override
