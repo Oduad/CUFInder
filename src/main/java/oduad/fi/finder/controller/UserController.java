@@ -9,5 +9,5 @@ public interface UserController {
     ResponseEntity<User> createUser(User user);
     ResponseEntity<User> updateUser(Long id, User user);
     User getUser(Long id);
-    void removeUser();
+    void removeUser(String name);
 }

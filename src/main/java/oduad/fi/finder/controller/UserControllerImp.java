@@ -37,17 +37,19 @@ public class UserControllerImp implements UserController{
     public ResponseEntity<User> updateUser(@PathVariable Long id,
                            @RequestBody User updatedUser) {
         updatedUser.setId(id);
-        repository.save(updatedUser);
+        userService.updateUser(id, updatedUser);
         return ResponseEntity.ok(updatedUser);
     }
 
     @Override
-    public User getUser(Long id) {
-        return null;
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.getUser(id);
     }
 
     @Override
-    public void removeUser() {
-
+    @DeleteMapping("/user/{name}")
+    public void removeUser(@PathVariable String name) {
+        userService.removeUser(name);
     }
 }
