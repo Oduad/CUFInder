@@ -1,15 +1,17 @@
-package oduad.fi.finder.dto;
+package oduad.fi.finder.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-public class MatchDTO {
+@Entity
+@Table(name = "match")
+public class Match {
 
-//This claass saves coincidences when 2 users like each other.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long senderId;
     private Long receiverId;
