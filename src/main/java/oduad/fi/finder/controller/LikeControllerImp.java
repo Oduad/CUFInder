@@ -5,7 +5,6 @@ import oduad.fi.finder.service.LikeServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,25 +14,25 @@ public class LikeControllerImp implements LikeController{
     @Autowired
     private LikeServiceImp likeService;
 
-    @PostMapping("/like")
+    @PostMapping("/like/{id}")
     @Override
     public ResponseEntity<Like> createLike(@RequestParam Long userId, @RequestParam Long targetUserId) {
         Like like = likeService.createLike(userId, targetUserId);
         return ResponseEntity.ok(like);
     }
 
-    @GetMapping("/likesgiven")
+    @GetMapping("/likesgiven/{id}")
     @Override
-    public ResponseEntity<List<Like>> getAllLikes(@RequestParam Long userId) {
-        return null;
-        //return ResponseEntity.ok(likeService.getAllLikes(userId));
+    public ResponseEntity<List<Like>> getSentLikes(@RequestParam Long userId) {
+        ResponseEntity<List<Like>>sentLikes = likeService.getSentLikes(userId);
+        return sentLikes;
     }
 
-    @GetMapping("/likesreceived")
+    @GetMapping("/likesreceived/{id}")
     @Override
     public ResponseEntity<List<Like>> getReceivedLikes(@RequestParam Long userId) {
-        return null;
-        //return ResponseEntity.ok(likeService.getReceivedLikes(userId));
+        ResponseEntity<List<Like>>receivedLikes = likeService.getReceivedLikes(userId);
+        return receivedLikes;
     }
 
 }

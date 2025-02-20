@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface LikeController {
 
-    public ResponseEntity<Like> createLike(Long userId, Long targetUserId);
+    ResponseEntity<Like> createLike(Long userId, Long targetUserId);
 
-    public ResponseEntity<List<Like>> getAllLikes(Long userId);
+    ResponseEntity<List<Like>> getSentLikes(Long userId);
 
-    public ResponseEntity<List<Like>> getReceivedLikes(Long userId);
+    ResponseEntity<List<Like>> getReceivedLikes(Long userId);
 
 }

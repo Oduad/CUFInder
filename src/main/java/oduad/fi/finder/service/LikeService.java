@@ -1,11 +1,14 @@
 package oduad.fi.finder.service;
 
 import oduad.fi.finder.entity.Like;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface LikeService {
 
-    public Like createLike(Long userId, Long targetUserId);
-
-    //public
+    Like createLike(Long userId, Long targetUserId);
+    ResponseEntity<List<Like>> getSentLikes(Long userId);
+    ResponseEntity<List<Like>> getReceivedLikes(Long userId);
 
 }

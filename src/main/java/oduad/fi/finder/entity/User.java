@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

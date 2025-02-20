@@ -5,6 +5,7 @@ import oduad.fi.finder.entity.Match;
 import oduad.fi.finder.repository.LikeRepositoy;
 import oduad.fi.finder.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,6 @@ public class LikeServiceImp implements LikeService {
 
     @Autowired
     private MatchRepository matchRepository;
-
 
     public Like createLike(Long userId, Long targetUserId) {
         if (likeRepository.existsByUserIdAndTargetUserId(userId, targetUserId)) {
@@ -38,7 +38,20 @@ public class LikeServiceImp implements LikeService {
         }
         return like;
     }
-
-
-
+    @Override
+    public ResponseEntity<List<Like>> getSentLikes(Long userId) {
+        List<Like> likesSent = likeRepository.findByUserId(userId);
+        if (likesSent.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(likesSent);
+    }
+    @Override
+    public ResponseEntity<List<Like>> getReceivedLikes(Long userId) {
+        List<Like> likesReceived = likeRepository.findByTargetUserId(userId);
+        if (likesReceived.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(likesReceived);
+    }
 }
