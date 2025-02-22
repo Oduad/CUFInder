@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Preferences {
+public class PreferenceDTO {
     //Every User can set search criteria
     private Long id;
     private UserDto user;
@@ -13,5 +13,7 @@ public class Preferences {
     private int maxAge;
     private int maxDistance;
     private int minHeight;
+    private String preferredGender;
+    private boolean profilePicture;
 
 }

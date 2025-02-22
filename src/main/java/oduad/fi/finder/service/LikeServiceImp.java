@@ -4,6 +4,7 @@ import oduad.fi.finder.entity.Like;
 import oduad.fi.finder.entity.Match;
 import oduad.fi.finder.repository.LikeRepositoy;
 import oduad.fi.finder.repository.MatchRepository;
+import oduad.fi.finder.repository.PreferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -11,7 +11,7 @@ public class UserDto {
     //This is for
 
     private Long id;
-    private String name;
+    private String username;
     private String email;
     private String password;
     private String gender;
