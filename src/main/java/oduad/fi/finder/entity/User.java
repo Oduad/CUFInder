@@ -16,18 +16,10 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String gender;
-    private String career;
-    private String school;
-    private Integer height;
-    @ManyToOne
-    @JoinColumn(name = "preference_id")
-    private Preference preference;
-    //It's about the student's biography
-    private String bio;
-    private String profilePictureUrl;
     private LocalDate birthDate;
     private LocalDateTime createdAt;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
 
 
 }

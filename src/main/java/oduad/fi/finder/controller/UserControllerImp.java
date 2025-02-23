@@ -1,5 +1,6 @@
 package oduad.fi.finder.controller;
 
+import oduad.fi.finder.entity.Like;
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.UserRepository;
 import oduad.fi.finder.service.UserService;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/fisfinder")
@@ -27,9 +30,13 @@ public class UserControllerImp implements UserController{
 
     @Override
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        try {
+            User createdUser = userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @Override
@@ -51,5 +58,12 @@ public class UserControllerImp implements UserController{
     @DeleteMapping("/user/{name}")
     public void removeUser(@PathVariable String name) {
         userService.removeUser(name);
+    }
+
+    @Override
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        ResponseEntity<List<User>>users = userService.getAllUsers();
+        return users;
     }
 }
