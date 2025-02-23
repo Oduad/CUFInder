@@ -12,7 +12,7 @@ public class PreferenceDTO {
     private int minAge;
     private int maxAge;
     private int maxDistance;
-    private int minHeight;
+    private float minHeight;
     private String preferredGender;
     private boolean profilePicture;
 

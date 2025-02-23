@@ -19,8 +19,8 @@ public class Preference {
     private int minAge;
     private int maxAge;
     private int maxDistance;
-    private int minHeight;
-    private int maxHeight;
+    private float minHeight;
+    private float maxHeight;
     private String preferredGender;
     private boolean profilePicture;
 
