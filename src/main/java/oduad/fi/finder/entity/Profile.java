@@ -30,6 +30,6 @@ public class Profile {
     private User user;
 
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Preference> preference;
+    private List<Preference> preferences;
 
 }

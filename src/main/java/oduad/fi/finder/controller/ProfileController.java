@@ -1,12 +1,12 @@
-package oduad.fi.finder.service;
+package oduad.fi.finder.controller;
 
 import oduad.fi.finder.dto.PreferenceDTO;
 import oduad.fi.finder.entity.Profile;
-import oduad.fi.finder.entity.User;
 import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
-public interface ProfileService {
+public interface ProfileController {
 
     Profile createProfile(Profile profile);
     Profile updateProfile(Long id, Profile profile);

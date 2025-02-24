@@ -1,5 +1,7 @@
 package oduad.fi.finder.service;
 
+import oduad.fi.finder.dto.PreferenceDTO;
+import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.Profile;
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.ProfileRepository;
@@ -52,4 +54,22 @@ public class ProfileServiceImp implements ProfileService{
         List<Profile>profiles = profileRepository.findAll();
         return ResponseEntity.ok(profiles);
     }
+
+    public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO) {
+        Profile profile = profileRepository.findById(profileId)
+                .orElseThrow(() -> new RuntimeException("Perfil no encontrado"));
+
+        Preference preference = new Preference();
+        preference.setProfile(profile);
+        preference.setMinAge(preferenceDTO.getMinAge());
+        preference.setMaxAge(preferenceDTO.getMaxAge());
+        preference.setMaxDistance(preferenceDTO.getMaxDistance());
+        preference.setMinHeight(preferenceDTO.getMinHeight());
+        //preference.setMaxHeight(preferenceDTO.getMaxHeight());
+        preference.setPreferredGender(preferenceDTO.getPreferredGender());
+        preference.setProfilePicture(preferenceDTO.isProfilePicture());
+        profile.setPreferences(List.of(preference));
+        return profileRepository.save(profile);
+    }
+
 }

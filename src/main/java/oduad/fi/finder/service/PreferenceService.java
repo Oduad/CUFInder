@@ -6,4 +6,8 @@ public interface PreferenceService {
     List<User> findUsersByPreferences(Long userId, int minAge, int maxAge,
                                       double maxDistance, String preferredGender,
                                       int minHeight, int maxHeight);
+
+    //void setPreferences(int minAge, int maxAge, int maxDistance,
+                        //String preferredGender, float minHeight, float maxHeight);
+
 }
