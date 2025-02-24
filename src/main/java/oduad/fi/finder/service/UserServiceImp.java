@@ -23,7 +23,7 @@ public class UserServiceImp implements UserService{
 
     @Override
     public User createUser(User user) {
-        if(userRepository.findByUsername(user.getUsername()).isPresent() &&
+        if(userRepository.findByName(user.getName()).isPresent() &&
         userRepository.findByEmail(user.getEmail()).isPresent()){
             throw new IllegalArgumentException(
                     "El nombre de usuario ya está en uso.");

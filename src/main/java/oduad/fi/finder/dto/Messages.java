@@ -6,9 +6,9 @@ public class Messages {
 
     private Long id;
 
-    private UserDto sender;
+    private UserDTO sender;
 
-    private UserDto receiver;
+    private UserDTO receiver;
 
     private String content;
 

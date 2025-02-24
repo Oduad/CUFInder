@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class PreferenceDTO {
     //Every User can set search criteria
     private Long id;
-    private UserDto user;
+    private UserDTO user;
     private int minAge;
     private int maxAge;
     private int maxDistance;

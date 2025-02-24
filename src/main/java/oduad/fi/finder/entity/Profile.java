@@ -2,10 +2,9 @@ package oduad.fi.finder.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,16 +19,17 @@ public class Profile {
     private String career;
     private String school;
     private float height;
-    @ManyToOne
-    @JoinColumn(name = "preference_id")
-    private Preference preference;
     private String bio;
     private String profilePictureUrl;
     private LocalDate birthDate;
     private LocalDateTime createdAt;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
     private String nationallity;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Preference> preference;
 
 }

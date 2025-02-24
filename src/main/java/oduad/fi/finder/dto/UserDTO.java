@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class UserDto {
+public class UserDTO {
 
     private Long id;
-    private String username;
+    private String name;
     private String email;
     private String password;
     private LocalDate birthDate;

@@ -13,13 +13,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String name;
     private String email;
     private String password;
     private LocalDate birthDate;
     private LocalDateTime createdAt;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    //@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Profile profile;
-
 
 }
