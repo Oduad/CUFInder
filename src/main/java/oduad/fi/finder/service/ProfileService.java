@@ -10,7 +10,7 @@ public interface ProfileService {
 
     Profile createProfile(Profile profile);
     Profile updateProfile(Long id, Profile profile);
-    void removeProfile(String username);
+    void removeProfile(Long id);
     Profile getProfile(Long id);
     ResponseEntity<List<Profile>> getAllProfiles();
     public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO);

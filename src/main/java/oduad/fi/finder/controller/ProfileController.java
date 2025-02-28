@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ProfileController {
 
-    Profile createProfile(Profile profile);
-    Profile updateProfile(Long id, Profile profile);
-    void removeProfile(String username);
+    ResponseEntity<?> createProfile(Profile profile);
+    ResponseEntity<Profile> updateProfile(Long id, Profile profile);
+    void removeProfile(Long id);
     Profile getProfile(Long id);
     ResponseEntity<List<Profile>> getAllProfiles();
     public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO);

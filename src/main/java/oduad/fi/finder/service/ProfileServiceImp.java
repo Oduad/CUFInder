@@ -35,8 +35,8 @@ public class ProfileServiceImp implements ProfileService{
     }
 
     @Override
-    public void removeProfile(String username) {
-        profileRepository.deleteByName(username);
+    public void removeProfile(Long id){
+        profileRepository.deleteById(id);
     }
 
     @Override
@@ -70,6 +70,5 @@ public class ProfileServiceImp implements ProfileService{
         preference.setProfilePicture(preferenceDTO.isProfilePicture());
         profile.setPreferences(List.of(preference));
         return profileRepository.save(profile);
+        }
     }
-
-}

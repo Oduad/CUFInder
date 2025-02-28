@@ -14,7 +14,7 @@ public class Preference {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", nullable = false)
+    @JoinColumn(name = "profile_id", nullable = true)
     private Profile profile;
 
     private int minAge;
