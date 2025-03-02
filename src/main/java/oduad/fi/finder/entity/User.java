@@ -22,5 +22,6 @@ public class User {
     //@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Profile profile;
+    private String role;
 
 }

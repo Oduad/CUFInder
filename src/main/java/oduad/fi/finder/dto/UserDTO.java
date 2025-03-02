@@ -18,5 +18,6 @@ public class UserDTO {
     private LocalDate birthDate;
     private LocalDateTime createdAt;
     private Profile profile;
+    private String role;
 
 }
