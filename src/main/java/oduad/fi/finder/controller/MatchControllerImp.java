@@ -1,20 +1,12 @@
-package oduad.fi.finder.service;
+package oduad.fi.finder.controller;
 
 import oduad.fi.finder.entity.Match;
-import oduad.fi.finder.repository.MatchRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class MatchServiceImp implements MatchService{
+public class MatchControllerImp implements MatchController{
 
-    MatchRepository matchRepository;
-
-    public MatchServiceImp(MatchRepository matchRepository){
-        this.matchRepository = matchRepository;
-    }
+    
 
     @Override
     public Match createMatch(Long userId1, Long userId2) {
@@ -23,7 +15,7 @@ public class MatchServiceImp implements MatchService{
 
     @Override
     public List<Match> getMatchesByUser(Long userId) {
-        return matchRepository.findByUser1Id(userId);
+        return null;
     }
 
     @Override
@@ -40,5 +32,4 @@ public class MatchServiceImp implements MatchService{
     public void notifyMatch(Match match) {
 
     }
-
 }
