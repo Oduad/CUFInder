@@ -1,5 +1,6 @@
 package oduad.fi.finder.service;
 
+import oduad.fi.finder.dto.MatchDTO;
 import oduad.fi.finder.entity.Match;
 
 import java.util.List;

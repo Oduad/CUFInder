@@ -1,6 +1,7 @@
 package oduad.fi.finder.controller;
 
 import oduad.fi.finder.entity.Match;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface MatchController {
 
     public List<Match> getMatchesByUser(Long userId);
 
-    public void deleteMatch(Long matchId);
+    public ResponseEntity<Void> deleteMatch(Long matchId);
 
     public boolean existsMatch(Long userId1, Long userId2);
 

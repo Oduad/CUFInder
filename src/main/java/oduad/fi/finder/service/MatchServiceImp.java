@@ -2,7 +2,6 @@ package oduad.fi.finder.service;
 
 import oduad.fi.finder.entity.Match;
 import oduad.fi.finder.repository.MatchRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,17 +27,18 @@ public class MatchServiceImp implements MatchService{
 
     @Override
     public void deleteMatch(Long matchId) {
-
+        matchRepository.deleteById(matchId);
     }
 
     @Override
     public boolean existsMatch(Long userId1, Long userId2) {
-        return false;
+        return matchRepository.existsByUser1IdAndUser2Id(userId1, userId2) ||
+                matchRepository.existsByUser1IdAndUser2Id(userId2, userId1);
     }
 
     @Override
     public void notifyMatch(Match match) {
-
+        matchRepository.notify();
     }
 
 }

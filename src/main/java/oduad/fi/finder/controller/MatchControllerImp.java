@@ -5,6 +5,9 @@ import oduad.fi.finder.repository.MatchRepository;
 import oduad.fi.finder.repository.UserRepository;
 import oduad.fi.finder.service.MatchServiceImp;
 import oduad.fi.finder.service.UserServiceImp;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,8 +37,10 @@ public class MatchControllerImp implements MatchController{
     }
 
     @Override
-    public void deleteMatch(Long matchId) {
-
+    @DeleteMapping("/{matchId}")
+    public ResponseEntity<Void> deleteMatch(@PathVariable Long matchId) {
+        matchServiceImp.deleteMatch(matchId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
