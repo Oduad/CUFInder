@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface MatchService {
 
-    public Match createMatch(Long userId1, Long userId2);
+    public void createMatch(Long userId1, Long userId2);
+
+    public boolean checkMatch(Long userId1, Long userId2);
 
     public
     List<Match> getMatchesByUser(Long userId);
@@ -16,6 +18,8 @@ public interface MatchService {
 
     public boolean existsMatch(Long userId1, Long userId2);
 
-    public void notifyMatch(Match match);
+    public void notifyMatch(Long userId, Long matchedUserId);
+
+
 
 }

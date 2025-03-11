@@ -9,6 +9,8 @@ public interface MatchController {
 
     public Match createMatch(Long userId1, Long userId2);
 
+    public boolean checkMatch(Long userId1, Long userId2);
+
     public List<Match> getMatchesByUser(Long userId);
 
     public ResponseEntity<Void> deleteMatch(Long matchId);

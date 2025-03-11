@@ -32,6 +32,11 @@ public class MatchControllerImp implements MatchController{
     }
 
     @Override
+    public boolean checkMatch(Long userId1, Long userId2) {
+        return false;
+    }
+
+    @Override
     public List<Match> getMatchesByUser(Long userId) {
         return matchServiceImp.getMatchesByUser(userId);
     }
