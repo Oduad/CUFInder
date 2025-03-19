@@ -13,6 +13,6 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     boolean existsByUser1IdAndUser2Id(Long user1Id, Long user2Id);
 
-
+    List<Match> findByUser1IdOrUser2Id(Long user1Id, Long user2Id);
 
 }

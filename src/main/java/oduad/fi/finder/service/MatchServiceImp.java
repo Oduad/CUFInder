@@ -5,18 +5,17 @@ import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.MatchRepository;
 import oduad.fi.finder.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class MatchServiceImp implements MatchService{
 
     MatchRepository matchRepository;
-
     UserRepository userRepository;
 
-    public MatchServiceImp(MatchRepository matchRepository){
+    public MatchServiceImp(MatchRepository matchRepository, UserRepository userRepository){
         this.matchRepository = matchRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -36,12 +35,15 @@ public class MatchServiceImp implements MatchService{
     }
 
     @Override
-    public List<Match> getMatchesByUser(Long userId) {
-        return matchRepository.findByUser1Id(userId);
+    public List<Match> getMatchesByUserId(Long userId) {
+        return matchRepository.findByUser1IdOrUser2Id(userId, userId);
     }
 
     @Override
     public void deleteMatch(Long matchId) {
+        if (!matchRepository.existsById(matchId)) {
+            throw new RuntimeException("No se encontró el match con ID: " + matchId);
+        }
         matchRepository.deleteById(matchId);
     }
 
@@ -53,19 +55,13 @@ public class MatchServiceImp implements MatchService{
 
     @Override
     public void notifyMatch(Long userId, Long matchedUserId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        User matchedUser = userRepository.findById(matchedUserId).orElseThrow();
-
+        List<User> users = userRepository.findUsersByIds(userId, matchedUserId);
+        if (users.size() < 2) {
+            throw new RuntimeException("Uno o ambos usuarios no existen");
+        }
+        // Identificar cuál es cuál basándonos en sus IDs
+        User user = users.get(0).getId().equals(userId) ? users.get(0) : users.get(1);
+        User matchedUser = users.get(0).getId().equals(matchedUserId) ? users.get(1) : users.get(0);
         String message = "🎉 ¡Has hecho match con " + matchedUser.getProfile().getUsername() + "!";
-
-        // Opción 1: Enviar un correo
-        //emailService.sendEmail(user.getEmail(), "¡Nuevo Match!", message);
-
-        // Opción 2: Notificación Push
-        //pushNotificationService.sendNotification(user, message);
-
-        // Opción 3: Notificación en la app (si usas WebSockets)
-        //webSocketService.sendNotification(userId, message);
     }
-
 }

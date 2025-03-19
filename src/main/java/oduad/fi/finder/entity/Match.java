@@ -10,9 +10,6 @@ import java.time.LocalDateTime;
 @Table(name = "matchdone")
 public class Match {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @ManyToOne
     @JoinColumn(name = "user1_id", nullable = false)
     private User user1;
@@ -21,7 +18,10 @@ public class Match {
     @JoinColumn(name = "user2_id", nullable = false)
     private User user2;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long senderId;
     private Long receiverId;
     private String content;

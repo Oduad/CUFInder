@@ -12,7 +12,7 @@ public interface MatchService {
     public boolean checkMatch(Long userId1, Long userId2);
 
     public
-    List<Match> getMatchesByUser(Long userId);
+    List<Match> getMatchesByUserId(Long userId);
 
     public void deleteMatch(Long matchId);
 
