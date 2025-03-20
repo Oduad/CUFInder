@@ -9,17 +9,10 @@ public interface MatchService {
 
     public void createMatch(Long userId1, Long userId2);
 
-    public boolean checkMatch(Long userId1, Long userId2);
-
-    public
-    List<Match> getMatchesByUserId(Long userId);
+    public List<Match> getMatchesByUserId(Long userId);
 
     public void deleteMatch(Long matchId);
 
-    public boolean existsMatch(Long userId1, Long userId2);
-
     public void notifyMatch(Long userId, Long matchedUserId);
-
-
 
 }

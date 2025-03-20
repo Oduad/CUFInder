@@ -12,23 +12,28 @@ public class MatchServiceImp implements MatchService{
 
     MatchRepository matchRepository;
     UserRepository userRepository;
+    // Servicios de notificación (correo, push, etc.) pueden inyectarse aquí
 
     public MatchServiceImp(MatchRepository matchRepository, UserRepository userRepository){
         this.matchRepository = matchRepository;
         this.userRepository = userRepository;
+        // Inicialización de servicios de notificación
     }
 
     @Override
     public void createMatch(Long userId1, Long userId2) {
         if (!checkMatch(userId1, userId2)) {
+            //if (!existsMatch(userId1, userId2)) {
             Match match = new Match();
             match.setUser1(userRepository.findById(userId1).orElseThrow());
             match.setUser2(userRepository.findById(userId2).orElseThrow());
             matchRepository.save(match);
+            //notifyMatch(userId1, userId2);
+            //notifyMatch(userId2, userId1);
         }
     }
 
-    @Override
+    //This method checks if there is a match
     public boolean checkMatch(Long userId1, Long userId2) {
         return matchRepository.existsByUser1IdAndUser2Id(userId1, userId2) ||
                 matchRepository.existsByUser1IdAndUser2Id(userId2, userId1);
@@ -45,12 +50,6 @@ public class MatchServiceImp implements MatchService{
             throw new RuntimeException("No se encontró el match con ID: " + matchId);
         }
         matchRepository.deleteById(matchId);
-    }
-
-    @Override
-    public boolean existsMatch(Long userId1, Long userId2) {
-        return matchRepository.existsByUser1IdAndUser2Id(userId1, userId2) ||
-                matchRepository.existsByUser1IdAndUser2Id(userId2, userId1);
     }
 
     @Override

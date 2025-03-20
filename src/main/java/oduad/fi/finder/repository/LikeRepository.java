@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LikeRepositoy extends JpaRepository<Like, Long> {
+public interface LikeRepository extends JpaRepository<Like, Long> {
 
     boolean existsByUserIdAndTargetUserId(Long userId, Long targetUserId);
     List<Like> findByUserId(Long userId);

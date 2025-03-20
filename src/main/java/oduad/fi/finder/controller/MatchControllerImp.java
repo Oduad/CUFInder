@@ -38,7 +38,7 @@ public class MatchControllerImp implements MatchController{
 
     @Override
     public List<Match> getMatchesByUser(Long userId) {
-        return matchServiceImp.getMatchesByUser(userId);
+        return matchServiceImp.getMatchesByUserId(userId);
     }
 
     @Override
