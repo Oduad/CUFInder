@@ -13,6 +13,8 @@ public interface MatchService {
 
     public void deleteMatch(Long matchId);
 
+    public boolean existMatch(Long userId1, Long userId2);
+
     public void notifyMatch(Long userId, Long matchedUserId);
 
 }

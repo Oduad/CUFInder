@@ -2,10 +2,7 @@ package oduad.fi.finder.controller;
 
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.PreferenceRepository;
-import oduad.fi.finder.repository.UserRepository;
-import oduad.fi.finder.service.UserServiceImp;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;

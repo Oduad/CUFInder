@@ -1,15 +1,10 @@
 package oduad.fi.finder.controller;
 
-import oduad.fi.finder.entity.Like;
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.UserRepository;
 import oduad.fi.finder.service.UserService;
-import oduad.fi.finder.service.UserServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +14,10 @@ import java.util.List;
 public class UserControllerImp implements UserController{
 
     //@Autowired
-    private final UserServiceImp userService;
-    //@Autowired
+    private final UserService userService;
     private final UserRepository repository;
 
-    public UserControllerImp(UserServiceImp userService, UserRepository repository){
+    public UserControllerImp(UserService userService, UserRepository repository){
         this.userService = userService;
         this.repository = repository;
     }
@@ -66,4 +60,5 @@ public class UserControllerImp implements UserController{
         ResponseEntity<List<User>>users = userService.getAllUsers();
         return users;
     }
+
 }

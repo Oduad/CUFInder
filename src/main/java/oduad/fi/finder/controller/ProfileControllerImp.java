@@ -44,7 +44,7 @@ public class ProfileControllerImp implements ProfileController{
     @Override
     @DeleteMapping("/user/{id}")
     public void removeProfile(@PathVariable Long id) {
-         profileService.removeProfile(id);
+        profileService.removeProfile(id);
     }
 
     @Override
@@ -61,8 +61,8 @@ public class ProfileControllerImp implements ProfileController{
     }
 
     @Override
-    public Profile updatePreferences(Long profileId,
-                                     PreferenceDTO preferenceDTO) {
+    @PutMapping("/preferences")
+    public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO) {
         return null;
     }
 }

@@ -1,7 +1,7 @@
 package oduad.fi.finder.controller;
 
 import oduad.fi.finder.entity.Like;
-import oduad.fi.finder.service.LikeServiceImp;
+import oduad.fi.finder.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,11 @@ import java.util.List;
 public class LikeControllerImp implements LikeController{
 
     @Autowired
-    private LikeServiceImp likeService;
+    private LikeService likeService;
+
+    public LikeControllerImp(LikeService likeService){
+        this.likeService = likeService;
+    }
 
     @PostMapping("/like/{id}")
     @Override

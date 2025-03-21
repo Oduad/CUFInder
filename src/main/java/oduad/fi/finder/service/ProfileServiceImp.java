@@ -3,10 +3,8 @@ package oduad.fi.finder.service;
 import oduad.fi.finder.dto.PreferenceDTO;
 import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.Profile;
-import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.ProfileRepository;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 import java.util.Optional;
 
