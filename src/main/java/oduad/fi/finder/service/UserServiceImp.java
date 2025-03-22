@@ -1,40 +1,50 @@
 package oduad.fi.finder.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImp implements UserService{
 
-    private final UserRepository userRepository;
     //@Autowired
+    private final UserRepository userRepository;
     public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public User createUser(User user) {
-        if(userRepository.findByName(user.getName()).isPresent() &&
-        userRepository.findByEmail(user.getEmail()).isPresent()){
+        if(userRepository.findByEmail(user.getEmail()).isPresent()){
             throw new IllegalArgumentException(
-                    "El nombre de usuario ya está en uso.");
+                    "This username already exists");
+        }
+        if(userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException(
+                    "This email already exists");
         }
         return userRepository.save(user);
     }
 
     @Override
+    //@PreAuthorize("#id == principal.id")
     public User updateUser(Long id, User updateUser) {
-        updateUser.setId(id);
-        return userRepository.save(updateUser);
+        Optional<User> existingUserOpt = userRepository.findById(id);
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+            // Update the mandatory atribbutes
+            existingUser.setName(updateUser.getName());
+            existingUser.setEmail(updateUser.getEmail());
+            existingUser.setBirthDate(updateUser.getBirthDate());
+            //existingUser.setProfile(updateUser.getProfile());
+            return userRepository.save(existingUser);
+        } else {
+            throw new EntityNotFoundException("User not found with the ID: " + id);
+        }
     }
 
     @Override

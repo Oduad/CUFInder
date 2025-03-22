@@ -37,7 +37,6 @@ public class UserControllerImp implements UserController{
     @PutMapping("/user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id,
                            @RequestBody User updatedUser) {
-        updatedUser.setId(id);
         userService.updateUser(id, updatedUser);
         return ResponseEntity.ok(updatedUser);
     }

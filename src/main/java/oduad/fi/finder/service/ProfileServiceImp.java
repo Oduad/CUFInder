@@ -5,9 +5,12 @@ import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.Profile;
 import oduad.fi.finder.repository.ProfileRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Service
 public class ProfileServiceImp implements ProfileService{
 
     private final ProfileRepository profileRepository;
@@ -21,13 +24,16 @@ public class ProfileServiceImp implements ProfileService{
         if(profileRepository.findByUserName(profile.getUsername()).isPresent())
         {
             throw new IllegalArgumentException(
-                    "El nombre de perfil ya está en uso.");
+                    "This profile name is already in use.");
         }
         return profileRepository.save(profile);
     }
 
     @Override
     public Profile updateProfile(Long id, Profile updateProfile) {
+        if (!profileRepository.existsById(id)) {
+            throw new NoSuchElementException("Profile not found with ID: " + id);
+        }//Do we need this part in the frontend?
         updateProfile.setId(id);
         return profileRepository.save(updateProfile);
     }
@@ -55,7 +61,7 @@ public class ProfileServiceImp implements ProfileService{
 
     public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO) {
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new RuntimeException("Perfil no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
 
         Preference preference = new Preference();
         preference.setProfile(profile);

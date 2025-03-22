@@ -63,6 +63,6 @@ public class ProfileControllerImp implements ProfileController{
     @Override
     @PutMapping("/preferences")
     public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO) {
-        return null;
+        return profileService.updatePreferences(profileId,preferenceDTO);
     }
 }
