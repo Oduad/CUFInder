@@ -3,6 +3,7 @@ package oduad.fi.finder.service;
 import oduad.fi.finder.dto.PreferenceDTO;
 import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.Profile;
+import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.ProfileRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,11 +32,18 @@ public class ProfileServiceImp implements ProfileService{
 
     @Override
     public Profile updateProfile(Long id, Profile updateProfile) {
-        if (!profileRepository.existsById(id)) {
-            throw new NoSuchElementException("Profile not found with ID: " + id);
-        }//Do we need this part in the frontend?
-        updateProfile.setId(id);
-        return profileRepository.save(updateProfile);
+        Profile existingProfile = profileRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Profile not found with ID: " + id));
+            existingProfile.setBirthDate(updateProfile.getBirthDate());
+            existingProfile.setHeight(updateProfile.getHeight());
+            existingProfile.setGender(updateProfile.getGender());
+            existingProfile.setNationallity(updateProfile.getNationallity());
+            existingProfile.setSchool(updateProfile.getSchool());
+            existingProfile.setCareer(updateProfile.getCareer());
+            existingProfile.setProfilePictureUrl(updateProfile.getProfilePictureUrl());
+            existingProfile.setBio(updateProfile.getBio());
+            existingProfile.setPreferences(updateProfile.getPreferences());
+        return profileRepository.save(existingProfile);
     }
 
     @Override
@@ -69,7 +77,7 @@ public class ProfileServiceImp implements ProfileService{
         preference.setMaxAge(preferenceDTO.getMaxAge());
         preference.setMaxDistance(preferenceDTO.getMaxDistance());
         preference.setMinHeight(preferenceDTO.getMinHeight());
-        //preference.setMaxHeight(preferenceDTO.getMaxHeight());
+        preference.setMaxHeight(preferenceDTO.getMaxHeight());
         preference.setPreferredGender(preferenceDTO.getPreferredGender());
         preference.setProfilePicture(preferenceDTO.isProfilePicture());
         profile.setPreferences(List.of(preference));

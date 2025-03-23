@@ -13,6 +13,7 @@ public class PreferenceDTO {
     private int maxAge;
     private int maxDistance;
     private float minHeight;
+    private float maxHeight;
     private String preferredGender;
     private boolean profilePicture;
 

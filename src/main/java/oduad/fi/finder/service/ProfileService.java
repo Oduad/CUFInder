@@ -13,6 +13,6 @@ public interface ProfileService {
     void removeProfile(Long id);
     Profile getProfile(Long id);
     ResponseEntity<List<Profile>> getAllProfiles();
-    public Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO);
+    Profile updatePreferences(Long profileId, PreferenceDTO preferenceDTO);
 
 }
