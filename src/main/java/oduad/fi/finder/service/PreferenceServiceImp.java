@@ -4,7 +4,6 @@ import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.User;
 import oduad.fi.finder.repository.PreferenceRepository;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public class PreferenceServiceImp implements PreferenceService {
 
     private final PreferenceRepository preferenceRepository;
-    private Preference preference;
 
     public PreferenceServiceImp(PreferenceRepository preferenceRepository) {
         this.preferenceRepository = preferenceRepository;

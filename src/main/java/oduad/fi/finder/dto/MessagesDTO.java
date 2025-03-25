@@ -1,7 +1,12 @@
 package oduad.fi.finder.dto;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
-public class Messages {
+@Data
+@NoArgsConstructor
+public class MessagesDTO {
     //Each conversation between users will save here
 
     private Long id;
