@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class MessagesDTO {
+public class MessageDTO {
     //Each conversation between users will save here
 
     private Long id;
