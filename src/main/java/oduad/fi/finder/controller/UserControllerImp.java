@@ -6,7 +6,6 @@ import oduad.fi.finder.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,11 +14,9 @@ public class UserControllerImp implements UserController{
 
     //@Autowired
     private final UserService userService;
-    private final UserRepository repository;
 
-    public UserControllerImp(UserService userService, UserRepository repository){
+    public UserControllerImp(UserService userService){
         this.userService = userService;
-        this.repository = repository;
     }
 
     @Override

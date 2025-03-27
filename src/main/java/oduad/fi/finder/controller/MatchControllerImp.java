@@ -12,10 +12,8 @@ import java.util.List;
 public class MatchControllerImp implements MatchController{
 
     private final MatchServiceImp matchService;
-    private final MatchRepository matchRepository;
 
-    public MatchControllerImp(MatchServiceImp matchServiceImp, MatchRepository matchRepository){
-        this.matchRepository = matchRepository;
+    public MatchControllerImp(MatchServiceImp matchServiceImp){
         this.matchService = matchServiceImp;
     }
 
