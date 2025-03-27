@@ -2,26 +2,27 @@ package oduad.fi.finder.service;
 
 import oduad.fi.finder.entity.Message;
 import oduad.fi.finder.entity.User;
-import oduad.fi.finder.repository.MessagesRepository;
+import oduad.fi.finder.repository.MessageRepository;
 import oduad.fi.finder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
-public class MessagesServiceImp implements MessagesService{
+public class MessageServiceImp implements MessageService{
 
-    private final MessagesRepository messagesRepository;
+    private final MessageRepository messageRepository;
     private final MatchService matchService;
     private final UserRepository userRepository;
 
-    MessagesServiceImp(MessagesRepository messagesRepository,
+    MessageServiceImp(MessageRepository messageRepository,
                        MatchService matchService,
                        UserRepository userRepository){
-        this.messagesRepository = messagesRepository;
-        this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
         this.matchService = matchService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -36,22 +37,30 @@ public class MessagesServiceImp implements MessagesService{
                 .orElseThrow(() -> new NoSuchElementException("Receiver not found"));
 
         Message message = new Message();
-
         message.setSender(sender);
         message.setReceiver(receiver);
         message.setContent(content);
         message.setSentAt(LocalDateTime.now());
-
-        return messagesRepository.save(message);
+        return messageRepository.save(message);
     }
 
     @Override
     public List<Message> getConversation(Long userId1, Long userId2) {
-        return null;
+        return messageRepository.findMessagesBetweenUsers(userId1, userId2);
     }
 
     @Override
     public void deleteMessage(Long messageId, Long userId) {
-
+        Optional<Message> messageOpt = messageRepository.findById(messageId);
+        if (messageOpt.isPresent()) {
+            Message message = messageOpt.get();
+            if (!message.getSender().getId().equals(userId)) {
+                throw new SecurityException("No cannot send a message you did not send.");
+            }
+            messageRepository.deleteById(messageId);
+        } else {
+            throw new NoSuchElementException("Message not found");
+        }
     }
+
 }
