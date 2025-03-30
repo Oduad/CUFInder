@@ -1,11 +1,9 @@
 package oduad.fi.finder.dto;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.User;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

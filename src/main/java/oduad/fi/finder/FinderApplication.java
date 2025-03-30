@@ -8,7 +8,7 @@ public class FinderApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinderApplication.class, args);
-		System.out.println("Here we go!");
+		System.out.println("Here we go, Oduad!");
 
 	}
 

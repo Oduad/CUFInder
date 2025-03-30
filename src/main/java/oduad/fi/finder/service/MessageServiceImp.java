@@ -28,7 +28,7 @@ public class MessageServiceImp implements MessageService{
     @Override
     public Message sendMessage(Long senderId, Long receiverId, String content) {
         if (!matchService.existMatch(senderId, receiverId)) {
-            throw new IllegalArgumentException("You can't send a message without a match.");
+            throw new IllegalArgumentException("You cannot send a message without a match.");
         }
 
         User sender = userRepository.findById(senderId)
@@ -55,7 +55,7 @@ public class MessageServiceImp implements MessageService{
         if (messageOpt.isPresent()) {
             Message message = messageOpt.get();
             if (!message.getSender().getId().equals(userId)) {
-                throw new SecurityException("No cannot send a message you did not send.");
+                throw new SecurityException("You cannot send a message you did not send.");
             }
             messageRepository.deleteById(messageId);
         } else {

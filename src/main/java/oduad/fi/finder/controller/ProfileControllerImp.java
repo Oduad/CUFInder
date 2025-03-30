@@ -15,11 +15,9 @@ import java.util.List;
 @RequestMapping("/fisfinder")
 public class ProfileControllerImp implements ProfileController{
 
-    private final ProfileRepository profilerepository;
     private final ProfileService profileService;
 
-    public ProfileControllerImp(ProfileRepository profilerepository, ProfileService profileService){
-        this.profilerepository = profilerepository;
+    public ProfileControllerImp(ProfileService profileService){
         this.profileService = profileService;
     }
 

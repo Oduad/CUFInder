@@ -1,7 +1,6 @@
 package oduad.fi.finder.controller;
 
 import oduad.fi.finder.entity.User;
-import oduad.fi.finder.repository.UserRepository;
 import oduad.fi.finder.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
