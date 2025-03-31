@@ -1,5 +1,6 @@
 package oduad.fi.finder.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import oduad.fi.finder.dto.PreferenceDTO;
 import oduad.fi.finder.entity.Preference;
 import oduad.fi.finder.entity.Profile;
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class ProfileServiceImp implements ProfileService{
 
     private final ProfileRepository profileRepository;
+    private final ObjectMapper objectMapper;
 
-    public ProfileServiceImp(ProfileRepository profileRepository) {
+    public ProfileServiceImp(ProfileRepository profileRepository, ObjectMapper objectMapper) {
         this.profileRepository = profileRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -43,6 +46,17 @@ public class ProfileServiceImp implements ProfileService{
             existingProfile.setBio(updateProfile.getBio());
             existingProfile.setPreferences(updateProfile.getPreferences());
         return profileRepository.save(existingProfile);
+
+        /*
+        Profile existingProfile = profileRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Profile not found with ID: " + id));
+
+        // Mapea solo los atributos no nulos de updatedProfile a existingProfile
+        objectMapper.updateValue(existingProfile, updatedProfile);
+
+        return profileRepository.save(existingProfile);
+        * */
+
     }
 
     @Override
@@ -82,4 +96,19 @@ public class ProfileServiceImp implements ProfileService{
         profile.setPreferences(List.of(preference));
         return profileRepository.save(profile);
         }
+            /*Profile profile = profileRepository.findById(profileId)
+                    .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+            Preference preference = new Preference();
+            preference.setProfile(profile);
+            preference.setMinAge(preferenceDTO.getMinAge());
+            preference.setMaxAge(preferenceDTO.getMaxAge());
+            preference.setMaxDistance(preferenceDTO.getMaxDistance());
+            preference.setMinHeight(preferenceDTO.getMinHeight());
+            preference.setMaxHeight(preferenceDTO.getMaxHeight());
+            preference.setPreferredGender(preferenceDTO.getPreferredGender());
+            preference.setProfilePicture(preferenceDTO.isProfilePicture());
+            profile.setPreferences(List.of(preference));
+            return profileRepository.save(profile);
+        }*/
     }
