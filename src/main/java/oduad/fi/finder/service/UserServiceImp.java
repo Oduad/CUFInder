@@ -19,6 +19,7 @@ public class UserServiceImp implements UserService{
 
     @Override
     public User createUser(User user) {
+        String hashPassord = "";
         if(userRepository.findByEmail(user.getEmail()).isPresent()){
             throw new IllegalArgumentException(
                     "This username already exists");
